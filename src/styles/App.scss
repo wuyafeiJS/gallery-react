@@ -3,6 +3,7 @@ html,body {
   height: 100%;
   background-color: #222;
 }
+
 .content{
   width: 100%;
   height: 100%;
@@ -13,13 +14,54 @@ html,body {
   width: 100%;
   height: 680px;
 }
+ 
 .img-sec{
   position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
   background-color: #ddd;
+  perspective: 1800px;
+  @at-root {
+    .img-figure {
+      position: absolute;
+      width: 330px;
+      height: 205px;
+      margin: 0;
+      padding: 40px;
+      background: #fff;
+      box-sizing: border-box;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform 0.6s ease-in-out,left 0.6s ease-in-out,top 0.6s ease-in-out;
+      perspective: 600px;
+      transform-origin: 0 50% 0;
+      &.is-inverse {
+        transform: translate(330px) rotateY(180deg);
 
+      }
+      figurecaption {
+      text-align: center;
+      background: #ddd;
+    .img-title{
+      margin: 20px 0 0 0;
+      color: #a7a0a2;
+      font-size: 16px;
+      text-align: center;
+  
+    }
+    .img-back {
+      position: absolute;left: 0;top: 0;width: 100%;height: 100%;padding: 30px;box-sizing: border-box;text-align: center;color: #666;
+      transform:rotateY(180deg);
+      background: #fff;
+      transition: transform 0.6s ease-in-out;
+    }
+  }   
+  }
+  
+    
+  }
+  
 }
 .controller-nav{
   position: absolute;
