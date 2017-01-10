@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'iconfont';  /* project id 199922 */
+  src: url('//at.alicdn.com/t/font_emndgglump1fw29.eot');
+  src: url('//at.alicdn.com/t/font_emndgglump1fw29.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_emndgglump1fw29.woff') format('woff'),
+  url('//at.alicdn.com/t/font_emndgglump1fw29.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_emndgglump1fw29.svg#iconfont') format('svg');
+}
 html,body {
   width: 100%;
   height: 100%;
@@ -36,9 +44,10 @@ html,body {
       transition: transform 0.6s ease-in-out,left 0.6s ease-in-out,top 0.6s ease-in-out;
       perspective: 600px;
       transform-origin: 0 50% 0;
+      transform-style: preserve-3d;
       &.is-inverse {
         transform: translate(330px) rotateY(180deg);
-
+       
       }
       figurecaption {
       text-align: center;
@@ -52,9 +61,12 @@ html,body {
     }
     .img-back {
       position: absolute;left: 0;top: 0;width: 100%;height: 100%;padding: 30px;box-sizing: border-box;text-align: center;color: #666;
+      //解决safari翻转bug 加z轴平移
       transform:rotateY(180deg);
+      backface-visibility: hidden;
       background: #fff;
       transition: transform 0.6s ease-in-out;
+      
     }
   }   
   }
@@ -70,4 +82,37 @@ html,body {
   z-index: 101;
   width: 100%;
   text-align: center;
+  @at-root {
+    .controller-unit {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      margin: 0 5px;
+
+      text-align: center;
+      cursor: pointer;
+      vertical-align: middle;
+      background-color: #aaa;
+      border-radius: 50%;
+      transform: scale(0.5);
+      transition: transform 0.6s ease-in-out,background-color 0.3s;
+      &.is-center {
+        background-color: #888;
+        transform: scale(1);
+        &.is-inverse {
+          background-color: #555;
+          transform: rotateY(180deg);
+        }
+        &::after {
+          color: #fff;
+          line-height: 30px;
+          font-size: 80%;
+          font-family: "iconfont";
+          content: "\e705";
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+      }
+    }
+  }
 }

@@ -25,7 +25,6 @@ function get30DegRandom() {
 }
 var ImgFigure = React.createClass({
   handleClick: function (e) {
-    
     e.stopPropagation();
     e.preventDefault();
     if(this.props.arrange.isCenter) {
@@ -42,8 +41,9 @@ var ImgFigure = React.createClass({
     }
     //如果图片的旋转角度有值且不为0，添加旋转角度
     if (this.props.arrange.rotate) {
-      (['-moz-','-webkit-','-ms-','']).forEach(function(value){
-        styleObj[value+'transform'] = 'rotate(' + this.props.arrange.rotate + 'deg)';
+      //内联得采用驼峰标识写法
+      (['MozTransform','WebkitTransform','msTransform','transform']).forEach(function(value){
+        styleObj[value] = 'rotate(' + this.props.arrange.rotate + 'deg)';
       }.bind(this))
       
     }
@@ -64,6 +64,31 @@ var ImgFigure = React.createClass({
           </div>
         </figurecaption>
       </figure>
+    )
+  }
+});
+var ControllerUnit = React.createClass({
+  handleClick: function(e){
+    e.preventDefault();
+    e.stopPropagation();
+
+    if(this.props.arrange.isCenter) {
+      this.props.inverse();
+    }else {
+      this.props.center();
+    }
+  },
+  render: function () {
+    var controllerUnitClassName = "controller-unit";
+    //如果对应的事居中的图片，显示控制按钮的居中态
+    if(this.props.arrange.isCenter) {
+      controllerUnitClassName += " is-center";
+      if(this.props.arrange.isInverse) {
+        controllerUnitClassName += "is-inverse";
+      }
+    }
+    return (
+      <span className={controllerUnitClassName} onClick={this.handleClick}></span>
     )
   }
 })
@@ -242,7 +267,8 @@ var GalleryByReactApp = React.createClass({
           isCenter: false
         }
       }
-      imgFigures.push(<ImgFigure key={index} ref={'imageFigure'+index} center={this.center(index)} data={value} inverse={this.inverse(index)} arrange={this.state.imgsArrangeArr[index]}/>)
+      imgFigures.push(<ImgFigure key={index} ref={'imageFigure'+index} center={this.center(index)} data={value} inverse={this.inverse(index)} arrange={this.state.imgsArrangeArr[index]}/>);
+      controllerUnits.push(<ControllerUnit key={index} arrange={this.state.imgsArrangeArr[index]} center={this.center(index)} inverse={this.inverse(index)}/>);
     }.bind(this))
     return (
      <section className="stage" ref="stage">
