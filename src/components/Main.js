@@ -84,7 +84,7 @@ var ControllerUnit = React.createClass({
     if(this.props.arrange.isCenter) {
       controllerUnitClassName += " is-center";
       if(this.props.arrange.isInverse) {
-        controllerUnitClassName += "is-inverse";
+        controllerUnitClassName += " is-inverse";
       }
     }
     return (
